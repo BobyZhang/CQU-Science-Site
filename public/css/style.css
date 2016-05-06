@@ -1,0 +1,175 @@
+
+/************************************************************
+
+*************************************************************/
+body {
+  padding: 0;
+  font-family: 'Microsoft YaHei', 'WenQuanYi Micro Hei', 'SimHei', 'tahoma', 'sans-serif';
+}
+
+header {
+  margin: 30px auto;
+}
+
+header .logo img {
+  height: 50px;
+  float: left;
+}
+
+header .logo span {
+  font-size: 26px;
+  font-weight: bold;
+  line-height: 50px;
+  display: inline-block;
+  margin-left: 20px;
+}
+
+.main-nav {
+  margin: 45px auto 0 auto;
+  /*border: 1px solid rgb(239, 239, 239);*/
+  border-radius: 3px;
+}
+
+.nav-list {
+  margin: auto 10px;
+}
+.nav-list:hover {
+  background: rgba(0, 0, 0, 0);
+  color: rgb(7, 142, 193);
+}
+/*.main-nav ul {
+  list-style: none;
+}
+
+.main-nav ul li {
+  float: left;
+  width: 180px;
+}*/
+
+.main-nav .homepage {
+  font-weight: bold;
+}
+
+.main-nav .nav-list a {
+  font-size: 18px;
+  color: rgba(0, 0, 0, 1);
+  cursor: pointer;
+}
+
+.back-to-top {
+  display: none;
+  position: fixed;
+  right: 7.6%;
+  bottom: 70px;
+  font-size: 36px;
+  cursor: pointer;
+}
+
+/***********************************************************
+
+***********************************************************/
+.homepage-content {
+  display: block;
+}
+
+.sub-title {
+  font-size: 22px;
+  margin: 10px 15px;
+  padding: 15px 0;
+  border-bottom: 1px solid rgb(239, 239, 239);
+}
+
+.items {
+  float: left !important;
+}
+.items .title a {
+  color: rgba(0, 0, 0, 1);
+}
+
+.items .tags {
+  margin: 18px auto;
+}
+.items .tags span {
+  font-size: 13px;
+}
+
+.items img {
+  width: 100%;
+}
+
+.items .detail {
+  margin: 18px 0;
+  font-size: 15px;
+}
+
+.footer {
+  margin-top: 30px;
+}
+
+.footer p {
+  padding: 15px 15px;
+  border-top: 1px solid rgb(239, 239, 239);
+}
+
+/**************************************************************
+
+**************************************************************/
+.article-content {
+  display: none;
+}
+
+.line {
+  width: calc(100% - 30px);
+  height: 1px;
+  background: rgb(239, 239, 239);
+  padding: 0 15px;
+}
+
+.title {
+  margin: 20px auto;
+}
+article .tags {
+  margin: 15px auto;
+}
+
+article .subject {
+  width: 100%;
+  /*margin: 20px auto;*/
+}
+
+article .content p {
+  font-size: 15px;
+  line-height: 26px;
+  margin: 30px auto;
+}
+
+article .content .imgs-set,
+article .content .img-explain {
+  text-align:center;
+  margin: 0;
+}
+
+.sub-nav ul {
+  list-style: none;
+  float: left;
+  margin: 20px auto;
+}
+
+.sub-nav ul li {
+  margin: 8px auto;
+  font-size: 16px;
+  color: rgb(98, 98, 98);
+  padding-left: 24px;
+  border-left: 2px solid rgba(7, 143, 193, 0);
+  cursor: pointer;
+}
+
+
+.sub-nav ul .curr-list {
+  color: rgb(7, 143, 193);
+  border-left: 2px solid rgb(7, 143, 193);
+}
+.sub-nav ul li:hover {
+  text-decoration: none;
+  color: rgb(7, 143, 193);
+}
