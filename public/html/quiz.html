@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>科普测试</title>
+  
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  
+  <!-- for quiz -->
+  <link rel="stylesheet" href="../css/plus.css">
+  <link rel="stylesheet" href="./quiz/style.css"/>
+</head>
+<body>
+  <!--<div class="container">-->
+  <header class="header">
+    <div class="container">
+      <div class="logo row">
+        <div class="col-md-1 col-sm-2 col-xs-3">
+          <img src="../imgs/logo.png" alt="logo" onclick="location.reload()">
+        </div>
+        
+        <div class="col-md-11 col-sm-10 col-xs-9">
+          <p class="site-name">我们身边的科学与技术原理</p>
+          <p class="site-name-en">Understanding the Science and Technology Principle around Us</p>
+        </div>
+        <div class="clear"></div>
+      </div>
+      <nav class="sub-page-nav">
+        <a class="home-sub-page" href="../index.html">
+          <span class="glyphicon glyphicon-home" aria-hidden="true"></span> 首页
+        </a>
+        <span>&nbsp;&nbsp>&nbsp;&nbsp;</span>
+        <a class="curr-sub-page">
+          科普测试
+        </a>
+      </nav>
+    </div>
+  </header>
+  
+  <div class="quiz-module container">
+    <div class="row">
+      <div class="quiz-content col-md-9">
+        <div>
+          <div class="p1" id='quiz-container'></div>
+          <!--<div class="fin" id="a1">重新答题</div>-->
+        </div>
+      </div>
+      <!--<div class="blank col-md-1"></div>-->
+      <div class="quiz-ranking col-md-3"></div>
+    </div>
+  </div>
+  <div class="back-to-top">
+    <span class="glyphicon glyphicon-circle-arrow-up" title="返回顶部"></span>
+  </div>
+  
+  <footer class="footer">
+    <div class="container">
+      <p col-md-12>copyright</p>
+    </div>
+  </footer>
+  <!--</div>-->
+  <script src="../js/jquery-2.1.4.min.js"></script>
+  <script src="../js/bootstrap.min.js"></script>
+  
+  <!-- homepage -->
+  <script src="../js/index.js"></script>
+  
+  <!-- quiz -->
+  <script type="text/javascript" src="./quiz/quiz.js"></script>
+  <script type="text/javascript" src="./quiz/content.js"></script>
+</body>
+</html>

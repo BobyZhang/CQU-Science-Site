@@ -2,23 +2,30 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>家电与电子产品</title>
+  <title>我们身边的科学与技术原理</title>
   
   <link rel="stylesheet" href="./css/bootstrap.min.css">
   <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-  <div class="container">
+  <!--<div class="container">-->
   <header class="header">
     <div class="container">
-      <div class="logo">
-        <img src="./imgs/logo.png" alt="logo">
-        <span>我们身边的科学与技术原理</span>
+      <div class="logo row">
+        <div class="col-md-1 col-sm-2 col-xs-3">
+          <img src="./imgs/logo.png" alt="logo" onclick="location.reload()">
+        </div>
+        
+        <div class="col-md-11 col-sm-10 col-xs-9">
+          <p class="site-name">我们身边的科学与技术原理</p>
+          <p class="site-name-en">Understanding the Science and Technology Principle around Us</p>
+        </div>
+        <div class="clear"></div>
       </div>
       <nav class="main-nav">
         <!--<div class="homepage col-md-2"><a href="javascript:;">首页</a></div>-->
         <ul class="nav nav-pills">
-          <li class="nav-list"><a class="homepage" id="homepage">首页</a></li>
+          <li class="nav-list homepage"><a class="homepage" id="homepage"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> 首页</a></li>
           <li class="nav-list"><a class="electronic" id="c-0.0">家电与电子产品</a></li>
           <li class="nav-list"><a class="commodity" id="c-1.0">日用品</a></li>
           <li class="nav-list"><a class="office-supplies" id="c-2.0">办公用品</a></li>
@@ -32,60 +39,80 @@
   </header>
   
   <div class="homepage-content">
-    <div class="container">
-      <div class="sub-title">随便逛逛</div>
-      <div class="items col-md-4 col-sm-6 col-xs-12">
-        <h3 class="title"><a href="">风扇</a></h3>
-        <div class="tags">
-          <span class="label label-default">电力</span>
-          <span class="label label-primary">自然</span>
-          <span class="label label-success">哈哈</span>
+    <div class="container notice-module">
+      <div class="row">
+        <div class="notice col-sm-9 col-xs-11">
+          <p class="little">关于我们：<p>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;欢迎访问本科普网站！我们的宗旨，是以网络为平台，通过多媒体演示、网上答题互动等形式，多角度、多层次地介绍与大家日常生活息息相关的用品、用具所蕴含的科学与技术原理，从而提高公民的科学素养。
+          </br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;罗马不是一天建成的，提高科学素养也非一件容易的事情，我们希望本网站能够为我国的科普工作添砖加瓦。如果您有好的想法，请给我们联系。另外，网站的部分素材选自互联网，如有涉及版权，请及时告知。
+          <a href="javascript:;">[了解更多]</a>
         </div>
-        <a href=""><img src="./imgs/CVT.png" alt="" class="imgs"></a>
-        <p class="detail">风扇使空气流动吹在人的皮肤上面，使人感觉凉爽。这时空气的温度降低了吗？其实没有，而是流动的空气带走了人体的热量，因此人感觉凉快。</p>
+        <div class="test col-sm-2 col-xs-3">
+          <a href="./html/quiz.html" target="_blank">
+            <img src="./imgs/c-test.png" alt="科普测试" title="快来看看你能拿多少分吧！">
+          </a>
+        </div>
       </div>
-      <div class="items col-md-4 col-sm-6 col-xs-12">
-        <h3 class="title"><a href="">燃气热水器</a></h3>
-        <div class="tags">
-          <span class="label label-primary">自然</span>
-          <span class="label label-success">哈哈</span>
+    </div>
+    <div class="show-module container">
+      <!--<div class="sub-title">随便逛逛</div>-->
+      <div class="line"></div>
+      <div class="row">
+        <div class="items col-md-4 col-sm-4 col-xs-12">
+          <h3 class="title"><a href="">风扇</a></h3>
+          <div class="tags">
+            <span class="label label-default">电力</span>
+            <span class="label label-primary">自然</span>
+            <span class="label label-success">哈哈</span>
+          </div>
+          <a href=""><img src="./imgs/c-CVT.png" alt="" class="imgs"></a>
+          <p class="detail">风扇使空气流动吹在人的皮肤上面，使人感觉凉爽。这时空气的温度降低了吗？其实没有，而是流动的空气带走了人体的热量，因此人感觉凉快。</p>
         </div>
-        <a href=""><img src="./imgs/diesel_engine.jpg" alt="" class="imgs"></a>
-        <p class="detail">燃气热水器是指以燃气作为燃料，通过燃烧加热方式将热量传递到流经热交换器的冷水，以达到热水制备目的的一种用具。</p>
+        <div class="items col-md-4 col-sm-4 col-xs-12">
+          <h3 class="title"><a href="">燃气热水器</a></h3>
+          <div class="tags">
+            <span class="label label-primary">自然</span>
+            <span class="label label-success">哈哈</span>
+          </div>
+          <a href=""><img src="./imgs/c-diesel_engine.jpg" alt="" class="imgs"></a>
+          <p class="detail">燃气热水器是指以燃气作为燃料，通过燃烧加热方式将热量传递到流经热交换器的冷水，以达到热水制备目的的一种用具。</p>
+        </div>
+        <div class="items col-md-4 col-sm-4 col-xs-12">
+          <h3 class="title"><a href="">自锁</a></h3>
+          <div class="tags">
+            <span class="label label-success">哈哈</span>
+          </div>
+          <a href=""><img src="./imgs/c-elevator.jpg" alt="" class="imgs"></a>
+          <p class="detail">机械千斤顶向上顶起后，即使手柄释放也不会被自动压下，这主要是利用了“自锁”的原理。</p>
+        </div>
       </div>
-      <div class="items col-md-4 col-sm-6 col-xs-12">
-        <h3 class="title"><a href="">自锁</a></h3>
-        <div class="tags">
-          <span class="label label-success">哈哈</span>
+      <div class="row">
+        <div class="items col-md-4 col-sm-4 col-xs-12">
+          <h3 class="title"><a href="">激光打印机</a></h3>
+          <div class="tags">
+            <span class="label label-primary">自然</span>
+          </div>
+          <a href=""><img src="./imgs/c-how-gps-works.jpg" alt="" class="imgs"></a>
+          <p class="detail">不知你是否有这样的经历：在干燥的冬天，如果将气球在毛衣上摩擦，气球就可以“吸起”小块的纸片，这是因为摩擦使气球带上了静电，由于异性电荷相吸引，就出现了这种现象。</p>
         </div>
-        <a href=""><img src="./imgs/elevator.jpg" alt="" class="imgs"></a>
-        <p class="detail">机械千斤顶向上顶起后，即使手柄释放也不会被自动压下，这主要是利用了“自锁”的原理。</p>
-      </div>
-      <div class="items col-md-4 col-sm-6 col-xs-12">
-        <h3 class="title"><a href="">激光打印机</a></h3>
-        <div class="tags">
-          <span class="label label-primary">自然</span>
+        <div class="items col-md-4 col-sm-4 col-xs-12">
+          <h3 class="title"><a href="">飞艇</a></h3>
+          <div class="tags">
+            <span class="label label-default">电力</span>
+            <span class="label label-primary">自然</span>
+            <span class="label label-success">哈哈</span>
+          </div>
+          <a href=""><img src="./imgs/c-key.jpg" alt="" class="imgs"></a>
+          <p class="detail">风扇使空气流动吹在人的皮肤上面，使人感觉凉爽。这时空气的温度降低了吗？其实没有，而是流动的空气带走了人体的热量，因此人感觉凉快。</p>
         </div>
-        <a href=""><img src="./imgs/how-gps-works.jpg" alt="" class="imgs"></a>
-        <p class="detail">不知你是否有这样的经历：在干燥的冬天，如果将气球在毛衣上摩擦，气球就可以“吸起”小块的纸片，这是因为摩擦使气球带上了静电，由于异性电荷相吸引，就出现了这种现象。</p>
-      </div>
-      <div class="items col-md-4 col-sm-6 col-xs-12">
-        <h3 class="title"><a href="">飞艇</a></h3>
-        <div class="tags">
-          <span class="label label-default">电力</span>
-          <span class="label label-primary">自然</span>
-          <span class="label label-success">哈哈</span>
+        <div class="items col-md-4 col-sm-4 col-xs-12">
+          <h3 class="title"><a href="">电梯</a></h3>
+          <div class="tags">
+            <span class="label label-default">电力</span>
+          </div>
+          <a href=""><img src="./imgs/c-mechanical_watch.jpg" alt="" class="imgs"></a>
+          <p class="detail">电梯是一种随着高楼大厦而出现的交通或运输工具。轿厢是电梯运载乘客或其他载荷的箱体部件。</p>
         </div>
-        <a href=""><img src="./imgs/key.jpg" alt="" class="imgs"></a>
-        <p class="detail">风扇使空气流动吹在人的皮肤上面，使人感觉凉爽。这时空气的温度降低了吗？其实没有，而是流动的空气带走了人体的热量，因此人感觉凉快。</p>
-      </div>
-      <div class="items col-md-4 col-sm-6 col-xs-12">
-        <h3 class="title"><a href="">电梯</a></h3>
-        <div class="tags">
-          <span class="label label-default">电力</span>
-        </div>
-        <a href=""><img src="./imgs/mechanical_watch.jpg" alt="" class="imgs"></a>
-        <p class="detail">电梯是一种随着高楼大厦而出现的交通或运输工具。轿厢是电梯运载乘客或其他载荷的箱体部件。</p>
       </div>
     </div>
   </div>
@@ -131,7 +158,7 @@
       <p col-md-12>copyright</p>
     </div>
   </footer>
-  </div>
+  <!--</div>-->
   <script src="./js/jquery-2.1.4.min.js"></script>
   <script src="./js/bootstrap.min.js"></script>
   

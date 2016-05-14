@@ -1,0 +1,315 @@
+body
+{
+    font-family: Helvetica, Tahoma, Arial, STXihei, "����ϸ��", "Microsoft YaHei", "΢���ź�", SimSun, "����", Heiti, "����", sans-serif;
+    font-weight: bold;
+}
+
+.btn-test:hover {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    background: #009D8E;
+}
+.main-quiz-holder {
+    /*margin: 0 auto;*/
+    /*position: relative;*/
+    /*background: #fafaa0;*/
+    /*border: 1px solid #fafaa0;*/
+    /*border-radius: 20px 2px 20px 2px;*/
+    /*width: 650px;*/
+}
+
+/*.main-quiz-holder * {
+    margin: 0;
+    padding: 0;
+}*/
+
+/*.main-quiz-holder a {
+    text-decoration: none;
+    color: #2d2d2d;
+}*/
+
+.main-quiz-holder .slide-container {
+    /*width: 600px;*/
+    padding: 0 0 50pt 0;
+}
+
+.results-container, .intro-container {
+    text-align: center;
+}
+
+.main-quiz-holder .slide-container .question, .main-quiz-holder h2.qTitle {
+    margin: 0 0 30px 0;
+    font-size: 15px;
+    font-weight: normal;
+}
+
+.main-quiz-holder h2.qTitle {
+    font-size: 20px;
+    line-height: 26px
+}
+
+.main-quiz-holder .question-number {
+    position: absolute;
+    width: 60px;
+    
+    right: calc(50% - 30px);
+    bottom: 18px;
+    color: #1e1e1e;
+}
+
+.main-quiz-holder .slide-container ul.answers {
+    margin: 0;
+    padding: 5px;
+    list-style: none;
+}
+
+.main-quiz-holder .slide-container ul.answers li {
+    cursor: pointer;
+    padding: 10px 30px;
+    margin: 0 0 25px 0;
+    color: #1e1e1e;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    font-size: 15px;
+    border: 1px solid #a1a1a1;
+    font-weight: normal;
+}
+
+.main-quiz-holder .slide-container ul.answers li.selected {
+    background: rgb(242, 243, 243);
+    color: #009D8E;
+    border: 1px solid #009D8E;
+}
+.main-quiz-holder .slide-container ul.answers li:hover {
+    background: rgb(242, 243, 243);
+    color: #009D8E;
+    border: 1px solid #009D8E;
+}
+
+.main-quiz-holder .slide-container .prev, 
+.main-quiz-holder .slide-container .next {
+    /*height: 23px;*/
+    cursor: pointer;
+    /*padding: 5px 10px;*/
+
+    /*font-size: 16px;*/
+    /*color: #1e1e1e;*/
+    /*border-radius: 5px;*/
+    /*background: #6ebec8;*/
+
+}
+
+/*.main-quiz-holder .slide-container .next {
+    background: #6ebdc7;
+}*/
+
+.main-quiz-holder .progress-keeper {
+    width: 100%;
+    height: 18px;
+    border-radius: 9px;
+    border: 1px solid #dedede;
+    margin: 0 auto 20px auto;
+}
+
+.main-quiz-holder .progress {
+    width: 0;
+    height: 18px;
+    color: #2d2d2d;
+    background: #009D8E;
+    border-radius: 9px;
+}
+/*������*/
+
+.main-quiz-holder .result-keeper {
+    margin: 10px;
+    text-align: center;
+}
+
+.main-quiz-holder .notice {
+    margin-top: -30px;
+    color: red;
+    position: absolute;
+    right: 20px;
+    bottom: 130px;
+}
+
+.main-quiz-holder .slide-container .prev {
+    /*width: 70px;*/
+    float: left;
+}
+
+.main-quiz-holder .slide-container .next, 
+.main-quiz-holder .slide-container .final {
+    /*width: 70px;*/
+    float: right;
+}
+
+.main-quiz-holder .slide-container .final {
+    /*width: 65px;*/
+}
+
+.main-quiz-holder .nav-previous {
+}
+
+.main-quiz-holder .nav-next {
+}
+
+.main-quiz-holder .nav-show-result {
+    /*padding-left: 25px;
+    background: url(images/confirm.png) left no-repeat;*/
+}
+
+.main-quiz-holder .nav-start {
+    display: block;
+    margin: 40px auto 0 auto;
+    line-height: 32px;
+    font-size: 20px;
+    font-weight: bold
+}
+
+.main-quiz-holder .nav-container {
+    padding: 5px;
+    margin: 15px 0;
+}
+
+.main-quiz-holder .result-row {
+    /*width: 80px;*/
+    margin: 10px 18px;
+    float: left;
+    position: relative;
+}
+
+
+.main-quiz-holder .result-row .resultsview-qhover {
+    background: #FCFCFC;
+    border: 2px solid rgb(230, 230, 230);
+
+    border-radius: 2px 10px 2px 10px;
+    position: absolute;
+    width: 300px;
+    top: 50px;
+    left: -80px;
+    z-index: 10;
+    padding: 15px;
+    text-align: left;
+    font-size: 15px;
+    font-weight: normal;
+    box-shadow: 2px 2px 2px 2px;
+}
+
+.main-quiz-holder .resultsview-qhover ul {
+    list-style: none;
+    margin: 10px 0;
+    padding: 0;
+}
+
+.main-quiz-holder .resultsview-qhover li {
+    /*padding: 0 28px;*/
+    margin: 0 0 8px 0;
+    min-height: 20px;
+    font-size: 15px;
+    background: #FCFCFC;
+    /*border: 1px solid #F6F6F6;*/
+    border-radius: 3px;
+}
+
+.main-quiz-holder .resultsview-qhover li.selected {
+}
+
+.main-quiz-holder .resultsview-qhover li.right {
+}
+
+.main-quiz-holder .correct, 
+.main-quiz-holder .wrong {
+    line-height: 36px;
+    cursor: pointer;
+    padding: 5px 35px;
+    font-size: 15px;
+    color: #4c4c4c;
+    border-radius: 4px;
+
+}
+
+.main-quiz-holder .correct {
+    background: #c3e462;
+
+    /*border: 1px solid #bfff00;*/
+}
+
+.main-quiz-holder .wrong {
+    background: #fc5e5e;
+
+    /*border: 1px solid #e36d6d;*/
+}
+
+.main-quiz-holder .correct span {
+    padding: 0 10px;
+    background: url(images/confirm.png) 7px 4px no-repeat;
+}
+
+.main-quiz-holder .wrong span {
+    padding: 0 10px;
+    background: url(images/delete.png) 7px 4px no-repeat;
+    color: #474747;
+}
+
+.main-quiz-holder .question {
+    padding-left: 5px;
+    line-height: 1.3em;
+    
+}
+
+.main-quiz-holder .share-button {
+    display: block;
+    margin: 15px 0;
+}
+
+.jquizzy-clear {
+    clear: both;
+}
+
+.main-quiz-holder .right {
+    float: none;
+}
+
+.main-quiz-holder img {
+    border: none;
+}
+
+.fin
+{
+    width: 75px;
+    height: 22px;
+    cursor: pointer;
+    padding: 6px 12px;
+    margin: 20px auto 10px auto;
+    font-size: 16px;
+    color: #1e1e1e;
+    border-radius: 5px;
+    background: #6ebec8;
+}
+
+body
+{
+    font-family: "Microsoft YaHei", SimSun, Heiti, sans-serif;
+}
+
+
+.btn-test {
+    border: 0;
+    background: #00B091;
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+    padding: 3px 35px;
+    line-height: 42px;
+    /*height: 42px;*/
+    display: inline-block;
+}
+
+.btn-finish {
+    background: #EC7063;
+}
+.btn-finish:hover {
+    background: #EC7070;
+}
