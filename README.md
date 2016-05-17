@@ -89,7 +89,7 @@ return:
 
 ### Get content of any section
 ``` 
-method: Get
+method: GET
 
 uri: /api/content?section="chpt.sect"
 ex:  /api/content?section=1.1

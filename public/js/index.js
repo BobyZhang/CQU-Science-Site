@@ -41,11 +41,11 @@ $(document).ready(function (){
   });
   
   // handle sub-nav click
-  bindSubNavClick();
+  bindSubNavClick($('.sub-nav ul li'));
 });
 
 function sendContentRequest(chpt) {
-  var url = './content?section=' + chpt;
+  var url = '/api/content?section=' + chpt;
   
   $.ajax({
     type: 'GET',
@@ -54,29 +54,42 @@ function sendContentRequest(chpt) {
   .done(function(resData) {
     var data = JSON.parse(resData);
     handleContentRequest(data);
+    
+    // scroll the page
+    var currPosY = $(document).scrollTop();
+    var articlePosY = $('article').offset().top;
+    
+    if (currPosY > articlePosY) {
+      $('body').animate({scrollTop: articlePosY});
+    }
   })
 }
 
 function handleContentRequest(data) {
+  var sA = data.section.split('.');
+  var currChpt = [];
+  currChpt.push(parseInt(sA[0]));
+  currChpt.push(parseInt(sA[1]));
+  
   // Change the sub-list first
-  if (!isSameChapter(data.currChpt)) {
+  if (!isSameChapter(currChpt)) {
     $('.sub-nav ul').html("");
     
     for (var i = 0; i < data.sectList.length; ++i) {
       // add class name
-      var list = new $('<li class="s-' + data.currChpt[0] + '.' + i + '"></li>');
+      var list = new $('<li class="s-' + currChpt[0] + '.' + i + '"></li>');
       // add the list
       list.html(data.sectList[i]);
       $('.sub-nav ul').append(list);
     }
-    bindSubNavClick(); // Bind sub-nav click
+    bindSubNavClick($('.sub-nav ul li')); // Bind sub-nav click
   }
   // change sub-nav style
   $('.sub-nav ul li').removeClass('curr-list');
-  $($('.sub-nav ul li')[data.currChpt[1]]).addClass('curr-list');
+  $($('.sub-nav ul li')[currChpt[1]]).addClass('curr-list');
   
   // Change the content
-  $('article .title').html(data.sectList[data.currChpt[1]]);  // change title
+  $('article .title').html(data.sectList[currChpt[1]]);  // change title
   var content = new $('<p></p>');  // change content
   var imgsSet = new $('<div class="imgs-set"></div>');
   for (var i = 0, lastIsImg = false; i < data.content.length; ++i) {
@@ -109,6 +122,24 @@ function handleContentRequest(data) {
     }
   }
   $('article .content').html(content);
+  
+  // add prev and next
+  $('.page-tuning').html("");
+  
+  var prev = $('<a href="javascript:;" id="prev"></a>');
+  var next = $('<a href="javascript:;" id="next"></a>');
+  
+  if (data.prev.sectTitle != "") {
+    $(prev).addClass('s-' + data.prev.section);
+    $(prev).html('&lt; ' + data.prev.sectTitle);
+    bindSubNavClick($(prev));
+  }
+  if (data.next.sectTitle != "") {
+    $(next).addClass('s-' + data.next.section);
+    $(next).html(data.next.sectTitle + ' &gt;');
+    bindSubNavClick($(next));
+  }
+  $('.page-tuning').append(prev).append(next);
 }
 
 function isSameChapter(chpt) {
@@ -124,9 +155,11 @@ function isSameSection() {
   
 }
 
-function bindSubNavClick() {
-  $('.sub-nav ul li').click(function () {
+//$('.sub-nav ul li')
+function bindSubNavClick(elements) {
+  elements.click(function () {
     var chpt = $(this).attr('class').split('-')[1];
+    
     // send request
     sendContentRequest(chpt);
   });
