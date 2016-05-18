@@ -66,7 +66,7 @@ Collections' detail:
 ```
 method: GET
 
-uri: /api/section
+uri: /api/catalogs
 
 return:
 {
@@ -75,13 +75,13 @@ return:
   
   sections: [
     {
+      chptNum: string
       chptTitle: string
-      sectList: []
-    },
-    {
-      chptTitle: string
-      sectList: []
-    },
+      sectList: [{
+        sectNum: string
+        sectTitle: string
+      }]
+    }
     ...
   ]
 }

@@ -10,9 +10,9 @@ var ObjectId = require('mongodb').ObjectID;
 var url = 'mongodb://localhost/ebook';
 
 // read the ebook first
-var ebookString = fs.readFileSync('ebook.json');
-var ebook = JSON.parse(ebookString);
-console.log('Read ebook success!');
+// var ebookString = fs.readFileSync('ebook.json');
+// var ebook = JSON.parse(ebookString);
+// console.log('Read ebook success!');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -58,8 +58,8 @@ router.get('/api/content', function (req, res) {
       // don't hava this section
       if (!sectionList || !sect) {
         resData = {
-          errcode: 1,
-          errmsg: "Cann't find this section!"
+          "errcode": 1,
+          "errmsg": "Cann't find this section!"
         }
         res.send(JSON.stringify(resData));
         res.end();
@@ -115,6 +115,111 @@ router.get('/api/content', function (req, res) {
   })
 }) 
 
+/* GET catalogs */
+router.get('/api/catalogs', function (req, res) {
+  var resData = {};
+  
+  MongoClient.connect(url, function (err, db) {
+    if (err) return;
+    
+    findCatalogs(db, function (catalogs) {
+      if (!catalogs) {
+        resData = {
+          "errcode": 1,
+          "errmsg": "Cann't find the catalogs"
+        }
+        db.close();
+        res.send(JSON.stringify(resData));
+        res.end();
+      }
+      
+      resData = {
+        "errcode": 0,
+        "errmsg": "",
+        "sections": []
+      }
+      // transfer the name 
+      for (let i = 0; i < catalogs.length; ++i) {
+        var oneSection = new Section(catalogs[i].chapter_id, 
+            catalogs[i].chapter_title);
+        
+        // resData.sections[i].sectList = [];
+        for (let j = 0; j < catalogs[i].sections.length;  ++j) {
+          var oneSectList = new SectList(catalogs[i].sections[j].section_id,
+              catalogs[i].sections[j].section_title);
+          oneSection.sectList.push(oneSectList);
+          // console.log(j);
+          // resData.sections[i].sectList[j].sectNum = 
+          // resData.sections[i].sectList[j].sectTitle = ;
+        }
+        resData.sections.push(oneSection);
+      }
+      
+      db.close();
+      res.send(JSON.stringify(resData));
+      res.end();
+    })
+  })
+})
+
+/* Updata the content */
+router.post('/api/modify', function (req, res) {
+  var resData = {};
+  var params = {
+    "section": req.body.section,
+    "content": req.body.contentStr.split('@@') // split
+  }
+  
+  MongoClient.connect(url, function(err, db) {
+    if (err) {
+      resData = {
+        "errcode": 1,
+        "errmsg": "Unkown err!"
+      }
+      res.send(JSON.stringify(resData));
+      res.end();
+      return;
+    }
+    
+    updateContent(db, params, function() {
+      resData = {
+        "errcode": 0,
+        "errmsg": ""
+      }
+      res.send(JSON.stringify(resData));
+      res.end();
+      db.close();
+    })
+  })
+  
+})
+
+function Section(chptNum, chptTitle) {
+  this.chptNum = chptNum;
+  this.chptTitle = chptTitle;
+  this.sectList = [];
+}
+function SectList(sectNum, sectTitle) {
+  this.sectNum = sectNum;
+  this.sectTitle = sectTitle;
+}
+
+function findCatalogs(db, callback) {
+  var catalogs = db.collection('catalogs').find().sort({"chapter_id": 1});
+  var cataArry = [];
+  
+  catalogs.each(function (err, doc) {
+    if (err) console.log(err);
+    
+    if (doc != null) {
+      cataArry.push(doc);
+    } 
+    else {
+      callback(cataArry);
+    }
+  })
+}
+
 function findContent(db, section, callback) {
   var sections = null;
   var sect = null;
@@ -139,6 +244,19 @@ function findContent(db, section, callback) {
       })
     }
   });
+}
+
+function updateContent(db, params, callback) {
+
+  db.collection('contents').updateOne(
+    {"section_id": params.section},
+    {
+      $set: {"section_content": params.content}
+    }, function (err, results) {
+      console.log(results);
+      callback();
+    }
+  )
 }
 
 module.exports = router;
