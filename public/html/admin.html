@@ -4,41 +4,62 @@
   <meta charset="UTF-8">
   <title>管理员修改</title>
   <link rel="stylesheet" href="../css/bootstrap.min.css">
+  <style>
+    body {
+      font-size: 16px;
+      font-family: 'Microsoft YaHei', 'WenQuanYi Micro Hei', 'SimHei', 'tahoma', 'sans-serif';
+    }
+    .content-wrapper {
+      margin: 50px;
+    }
+    .rules {
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #ddd;
+    }
+    .menu {
+      margin: 20px 0;
+    }
+    .content-area {
+      min-height: 30px;
+      padding: 20px 30px;
+      border: 1px solid #ddd;
+    }
+    .submit-modified {
+      margin: 20px 0;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
     <div class="content-wrapper">
-      <!--<div class="dropdown">
-        <button class="btn btn-default dropdown-toggle" type="button" id="chpt-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-          请选择章节
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="chpt-menu">
-          <li><a href="#">test1</a></li>
-          <li><a href="#">test2</a></li>
-          <li><a href="#">test3</a></li>
-          <li><a href="#">test5</a></li>
-        </ul>
-      </div>-->
-      
+      <div class="rules">
+        <p><b>添加规则：</b></P>
+        <p>1. 段与段之间用 "-----" 五个连线符区分开(不包含双引号)，其中一张图片，一个视屏都算单独的一段。
+        </P><p>2. 添加图片的规则： "imgs/" + "图片的名字"，如 "imgs/电梯.png" (不包含引号，以下所有格式相关都不包含引号)。
+        </P><p>&nbsp;&nbsp;&nbsp;&nbsp;(注意： 当相邻段落都为图片时，这些图片会显示在同一行。)
+        </P><p>3. 添加视频的规则： "videos/" + "视频的名字"，如 "videos/手表.mp4"。
+        </P><p>4. 添加图片或视频的解释短语规则： "define/" + "解释短语"，如 "define/燃气灶的工作原理"。
+        
+        </p>
+      </div>
       <div class="menu">
-        请选择章：
+        <b>请选择章：</b>
         <select name="" id="" class="chpt-menu">
-          <option value="0"></option>
+          <!--<option value="0"></option>
           <option value="0">test1</option>
           <option value="1">test2</option>
-          <option value="2">test3</option>
+          <option value="2">test3</option>-->
         </select>
         
-        请选择节：
+        <b>请选择节：</b>
         <select name="" id="" class="sect-menu">
-          <option value="0">test1</option>
-          <option value="1">test2</option>
-          <option value="2">test3</option>
+          <option value=></option>
+          <!--<option value="1">test2</option>
+          <option value="2">test3</option>-->
         </select>
-      </div>
-      
-      <p>具体内容：</p>
+      </div>  
+      <p><b>具体内容：</b></p>
       <div class="content-area" contenteditable="true"></div>
       
       <input type="button" class="btn btn-info submit-modified" value="提交修改">
