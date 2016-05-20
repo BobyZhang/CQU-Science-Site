@@ -161,34 +161,39 @@ header .logo .site-name-en {
 .title {
   margin: 20px auto;
 }
-article .tags {
+#article .tags {
   margin: 15px auto;
 }
 
-article .subject {
+#article .subject {
   width: 100%;
   /*margin: 20px auto;*/
 }
 
-article .content p {
+#article .content p {
   font-size: 15px;
   line-height: 26px;
   margin: 30px auto;
 }
 
-article .content .imgs-set,
-article .content .img-explain {
+#article .content .imgs-set,
+#article .content .img-explain {
   text-align:center;
   margin: 0;
 }
 
-.sub-nav ul {
+#article .article-video {
+  width: 100%;
+  margin: 20px 0;
+}
+
+#sub-nav ul {
   list-style: none;
   float: left;
   margin: 20px auto;
 }
 
-.sub-nav ul li {
+#sub-nav ul li {
   margin: 8px auto;
   font-size: 16px;
   color: rgb(98, 98, 98);
@@ -198,11 +203,11 @@ article .content .img-explain {
 }
 
 
-.sub-nav ul .curr-list {
+#sub-nav ul .curr-list {
   color: rgb(7, 143, 193);
   border-left: 2px solid rgb(7, 143, 193);
 }
-.sub-nav ul li:hover {
+#sub-nav ul li:hover {
   text-decoration: none;
   color: rgb(7, 143, 193);
 }

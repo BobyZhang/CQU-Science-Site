@@ -70,8 +70,10 @@ router.get('/api/content', function (req, res) {
       resData = {
         "errcode": 0,
         "errmsg": "",
+        
+        "sectTitle": sect.section_title,
+        "section": section,   // section in the request
         "sectList": [],
-        "section": section,
         "content": sect.section_content,
         "prev": {
           "section": "",
@@ -84,7 +86,10 @@ router.get('/api/content', function (req, res) {
       }
       
       for (let i = 0; i < sectionList.length; ++i) {
-        resData.sectList.push(sectionList[i].section_title);
+        resData.sectList.push({
+          "section": sectionList[i].section_id,
+          "sectTitle": sectionList[i].section_title
+        });
       }
       
       var sectionArry = section.split('.');
@@ -98,13 +103,13 @@ router.get('/api/content', function (req, res) {
       if (prevSectNum >= 0) {
         resData.prev = {
           "section": chptNum + '.' + prevSectNum,
-          "sectTitle": resData.sectList[prevSectNum]
+          "sectTitle": resData.sectList[prevSectNum].sectTitle
         }
       }
       if (nextSectNum < resData.sectList.length) {
         resData.next = {
           "section": chptNum + '.' + nextSectNum,
-          'sectTitle': resData.sectList[nextSectNum]
+          'sectTitle': resData.sectList[nextSectNum].sectTitle
         }
       }
       

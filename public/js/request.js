@@ -1,4 +1,4 @@
-var request = {
+ var request = {
   // getContent 
   getContent: function (section, callback) {
     $.ajax({

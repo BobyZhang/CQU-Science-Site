@@ -1,3 +1,7 @@
+// "use strict";
+
+// import { request } from 'request.js';
+
 $(document).ready(function (){
   
   // addListener back to top
@@ -35,41 +39,254 @@ $(document).ready(function (){
       $('.article-content').css({display: 'block'});
       // send request
       var chpt = $(this).attr('id').split('-')[1];
-      sendContentRequest(chpt);
+      sendContentRequest(chpt, function() {
+        // change the list style
+        $('.sub-nav ul li').removeClass('curr-list');
+        console.log($(('.s-' + chpt)));
+        $(('.s-' + chpt)).addClass('curr-list');
+      });
     }
     
   });
   
   // handle sub-nav click
-  bindSubNavClick($('.sub-nav ul li'));
+  // bindSubNavClick($('.sub-nav ul li'));
 });
 
-function sendContentRequest(chpt) {
-  var url = '/api/content?section=' + chpt;
+function sendContentRequest(section, callback) {
+  // var url = '/api/content?section=' + section;
   
-  $.ajax({
-    type: 'GET',
-    url: url
-  })
-  .done(function(resData) {
-    var data = JSON.parse(resData);
-    handleContentRequest(data);
+  // $.ajax({
+  //   type: 'GET',
+  //   url: url
+  // })
+  // .done(function(resData) {
+  //   var data = JSON.parse(resData);
+  //   handleContentRequest(data);
     
-    // scroll the page
-    var currPosY = $(document).scrollTop();
-    var articlePosY = $('article').offset().top;
+  //   // scroll the page
+  //   var currPosY = $(document).scrollTop();
+  //   var articlePosY = $('article').offset().top;
     
-    if (currPosY > articlePosY) {
-      $('body').animate({scrollTop: articlePosY});
+  //   if (currPosY > articlePosY) {
+  //     $('body').animate({scrollTop: articlePosY});
+  //   }
+    
+  // });
+  
+  request.getContent(section, function(resData) {
+    // detect error
+    if (resData.errcode == 1) {
+      alert(resData.errmsg);
+      return ;
     }
-  })
+    
+    handleContentRequest(resData);
+    
+    callback();
+  });
 }
 
+// class
+class Article {
+  constructor() {
+    this.article = new $('<article></article>');
+    this.title = new $('<h3 class="title"></h3>');
+    this.content = new $('<div class="content"></div');
+    this.pageTuning = new $('<div class="page-tuning"></div>');
+    this.ptPrev = new $('<a href="javascript:;" id="prev"></a>');
+    this.ptNext = new $('<a href="javascript:;" id="next"></a>');
+    
+    // pakage as an article
+    this.pageTuning.append(this.ptPrev).append(this.ptNext);
+    this.article.append(this.title).append(this.content).append(this.pageTuning);
+    
+    // bind page turning click
+    bindSubNavClick(this.ptPrev);
+    bindSubNavClick(this.ptNext);
+    
+    return this;  
+  }
+  
+  setTitle(title) {
+    this.title.html(title);
+  }
+  
+  setContent(contentArry) {
+    // set strategies
+    var strateges = {
+      "isText": function(container, content) {
+        container.append(content);
+        container.append('<br><br>');
+      },
+      "isDefine": function(container, content) {
+        var imgExplain = new $('<p class="img-explain"></p>');
+        imgExplain.html(content.split('/')[1]);
+        
+        container.append(imgExplain);
+        container.append('<br>');
+      },
+      "isVideo": function(container, content) {
+        var newVideo = new $('<video class="article-video" controls=""controls>您的浏览器不支持 video 标签。</video>');
+        newVideo.attr('src', content);
+        
+        container.append(newVideo);
+        container.append('<br>');
+      },
+      "isImg": function(container, content) {
+        var newImg = new $('<img>');
+        newImg.attr('src', content);
+        
+        container.append(newImg);
+      },
+      "isImgsSet": function(container, content) {
+        container.append(content);
+        // container.append('<br>');
+      }
+    }
+    var addToContent = function(level, container, content) {
+      return strateges[level](container, content);
+    }
+    
+    var content = new $('<p></p>');
+    var imgsSet = new $('<div class="imgs-set"></div>');  // for handle a lot of imgs in one line
+    
+    for (let i = 0; i < contentArry.length; ++i) {
+      // Img
+      if (contentArry[i].indexOf('imgs/') >= 0) {
+        addToContent('isImg', imgsSet, contentArry[i]);
+      }
+      // Not an img
+      else {
+        // Imgs set
+        if (imgsSet.html() != "") {
+          addToContent('isImgsSet', content, imgsSet);
+          imgsSet = new $('<div class="imgs-set"></div>');
+        }
+        
+        // Defination
+        if (contentArry[i].indexOf('define/') >= 0) {
+          addToContent('isDefine', content, contentArry[i])
+        }
+        // Video
+        else if (contentArry[i].indexOf('videos/') >= 0) {
+          addToContent('isVideo', content, contentArry[i]);
+        }
+        // Text
+        else {
+          addToContent('isText', content, contentArry[i]);
+        }
+      }
+    }
+    
+    this.content.html(content);
+  }
+  
+  setPageTuningPrev(section, sectTitle) {
+    this.ptPrev.html(""); // init
+    
+    if (sectTitle == "") return;
+    
+    this.ptPrev.html('&lt; ' + sectTitle);
+    // be deleted
+    this.ptPrev.removeClass().addClass('s-' + section);
+    this.ptPrev.attr('data-section', section);
+  }
+  
+  setPageTuningNext(section, sectTitle) {
+    this.ptNext.html(""); // init
+    
+    if (sectTitle == "") return;
+
+    this.ptNext.html(sectTitle + ' &gt;');
+    this.ptNext.removeClass().addClass('s-' + section);
+    this.ptNext.attr('data-section', section);
+  }
+  
+  init(resData) {
+    // set the article tittle
+    this.setTitle(resData.sectTitle);
+    
+    // set the content
+    this.setContent(resData.content);
+    
+    // set the page tuning
+    this.setPageTuningPrev(resData.prev.section, resData.prev.sectTitle);
+    this.setPageTuningNext(resData.next.section, resData.next.sectTitle);
+  }
+  
+  node() {
+    return this.article;
+  }
+}
+
+class SubNav {
+  constructor() {
+    this.list = new $('<ul></ul>');
+    
+    return this;
+  }
+  
+  setSubNavList(sectList) {
+    this.list.html("");    // init
+    
+    for (let i = 0; i < sectList.length; ++i) {
+      var items = new $('<li></li>');
+      items.addClass('s-' + sectList[i].section);
+      items.attr('data-section', sectList[i].section);
+      items.html(sectList[i].sectTitle);
+      // bind click event
+      bindSubNavClick(items);
+      
+      this.list.append(items);
+    }
+  }
+  
+  node() {
+    return this.list;
+  }
+}
+
+var createSingleArticle = (function () {
+  var oneArticle;
+  return function () {
+    if (!oneArticle) {
+      oneArticle = new Article();
+    }
+    return oneArticle;
+  }
+})();
+
+var createSingleSubNav = (function () {
+  var subNav;
+  return function () {
+    if (!subNav) {
+      subNav = new SubNav();
+    }
+    return subNav;
+  }
+})();
+
 function handleContentRequest(data) {
+  
+  var article = createSingleArticle();
+  var subNav = createSingleSubNav();
+  // reload the content
+  article.init(data);
+  subNav.setSubNavList(data.sectList);
+  
+  // when first load
+  if ($('#article').children().length == 0) {
+    $('#article').append(article.node());
+    $('#sub-nav').append(subNav.node());
+  }
+  
+  /*
   var sA = data.section.split('.');
   var currChpt = [];
   currChpt.push(parseInt(sA[0]));
   currChpt.push(parseInt(sA[1]));
+  
   
   // Change the sub-list first
   if (!isSameChapter(currChpt)) {
@@ -140,6 +357,7 @@ function handleContentRequest(data) {
     bindSubNavClick($(next));
   }
   $('.page-tuning').append(prev).append(next);
+  */
 }
 
 function isSameChapter(chpt) {
@@ -158,9 +376,16 @@ function isSameSection() {
 //$('.sub-nav ul li')
 function bindSubNavClick(elements) {
   elements.click(function () {
-    var chpt = $(this).attr('class').split('-')[1];
-    
+    // var chpt = $(this).attr('class').split('-')[1];
+    var section = $(this).attr('data-section');
     // send request
-    sendContentRequest(chpt);
+    sendContentRequest(section, function() {
+      // callback means success
+      // change the list style
+      $('#sub-nav ul li').removeClass('curr-list');
+      console.log($('#sub-nav ul').children('.s-' + section));
+      $('.s-' + section).addClass('curr-list');
+    });
   });
 }
+

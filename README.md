@@ -99,8 +99,12 @@ return:
   errcode: succ 0 | err 1
   errmsg: "Don't have this section"
   
-  sectList: []
-  section: string
+  sectTitle: string    // current sectTitle
+  section: string      // current section
+  sectList: [{
+    section: string 
+    sectTitle: string
+  }]
   content: []
   prev: {
     section: string
