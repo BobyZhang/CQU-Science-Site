@@ -19,35 +19,8 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-/* GET content*/
+/* Get content*/
 router.get('/api/content', function (req, res) {
-  // var sect = req.query.section;
-  // var chptString = sect.split('.');
-  // var chpt = [];
-  
-  // for (var i = 0; i < chptString.length; ++i) chpt.push(parseInt(chptString[i]));
-  
-  // if (chpt.length != 2 || chpt[0] >= ebook.length 
-  //     || chpt[1] >= ebook[chpt[0]].chapter_content.length) {
-  //   res.write('404, NOT FOUND!');
-  //   res.end();
-  //   return;
-  // }
-  
-  // var resData = {};
-  // var sectList = [];
-  // for (var i = 0; i < ebook[chpt[0]].chapter_content.length; ++i) {
-  //   sectList.push(ebook[chpt[0]].chapter_content[i].section_title);
-  // }
-  
-  // // the data
-  // resData.sectList = sectList;
-  // resData.content = ebook[chpt[0]].chapter_content[chpt[1]].section_content;
-  // resData.currChpt = chpt;
-  
-  // res.send(JSON.stringify(resData));
-  // res.end();
-  
   var section = req.query.section;
   var resData = {};
   
@@ -120,7 +93,7 @@ router.get('/api/content', function (req, res) {
   })
 }) 
 
-/* GET catalogs */
+/* Get catalogs */
 router.get('/api/catalogs', function (req, res) {
   var resData = {};
   
@@ -199,6 +172,84 @@ router.post('/api/modify', function (req, res) {
   
 })
 
+/* Get or update the ranking */
+router.get('/api/ranking', function (req, res) {
+  var resData = {};
+  var params = {
+    "count": (req.query.count && parseInt(req.query.count)) || 5,
+    "username": req.query.username || null,
+    "score": (req.query.score == "0" && 0) || (req.query.score && parseInt(req.query.score)) || null
+  }
+  
+  
+  MongoClient.connect(url, function (err, db) {
+    if (err) {
+      resData = {
+        "errcode": 1,
+        "errmsg": "Cann't connected the data server!"
+      }
+      res.send(JSON.stringify(resData));
+      res.end();
+    }
+    
+    // update and get
+    if (params.username && params.score) {
+      insertRanking(db, params, function (err) {
+        if (err) {
+          db.close();
+          errHandle(res, "Insert data failed!");
+        }
+        
+        findRanking(db, function (rankers) {
+          db.close();
+          findRankingHandle(res, params, rankers);
+        })
+      })
+    }
+    
+    // get
+    else {
+      findRanking(db, function (rankers) {
+        db.close();
+        findRankingHandle(res, params, rankers);
+      })
+    }
+  })
+})
+
+function findRankingHandle (res, params, rankers) {
+  // if err
+  if (!rankers) errHandle(res, "Query error!");
+  
+  var resData = {
+    "errcode": 0,
+    "errmsg": "",
+    
+    "totleCount": rankers.length,
+    "count": Math.min(params.count, rankers.length),
+    "rankers": []
+  }
+  
+  for (let i = 0; i < Math.min(rankers.length, params.count); ++i) {
+    resData.rankers.push({
+      "username": rankers[i].username,
+      "score": rankers[i].score
+    });
+  }
+  
+  res.send(JSON.stringify(resData));
+  res.end();
+}
+
+function errHandle(res, errmsg) {
+  resData = {
+    "errcode": 1,
+    "errmsg": errmsg
+  }
+  res.send(JSON.stringify(resData));
+  res.end();
+}
+
 function Section(chptNum, chptTitle) {
   this.chptNum = chptNum;
   this.chptTitle = chptTitle;
@@ -252,7 +303,6 @@ function findContent(db, section, callback) {
 }
 
 function updateContent(db, params, callback) {
-
   db.collection('contents').updateOne(
     {"section_id": params.section},
     {
@@ -262,6 +312,33 @@ function updateContent(db, params, callback) {
       callback();
     }
   )
+}
+
+function insertRanking(db, params, callback) {
+  db.collection('ranking').insertOne({
+    "username": params.username,
+    "score": params.score,
+    "data": new Date().getTime()
+  }, function (err, result) {
+    if (err) callback(err);
+    else callback(null);
+  })
+}
+
+function findRanking(db, callback) {
+  var rankerArry = [];
+  var rankers = db.collection('ranking').find().sort({ "score": -1, "data": -1 });
+  
+  rankers.each(function (err, doc) {
+    if (err) console.log(err);
+    
+    if (doc != null) {
+      rankerArry.push(doc);
+    }
+    else {
+      callback(rankerArry);
+    }
+  })
 }
 
 module.exports = router;

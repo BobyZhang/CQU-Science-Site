@@ -12,12 +12,120 @@
   min-height: 440px;
 }
 
-.quiz-module .quiz-ranking {
-  min-height: 200px;
-  background: rgb(238, 238, 238);
-}
-
 .quiz-module iframe {
   width: 100%;
   height: 400px;
+}
+
+#extra-module {
+  display: none;
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+#extra-module .window {
+  width: 400px;
+  height: 260px;
+  background: rgba(244, 244, 244, 1);
+  position: relative;
+  top: calc(50% - 130px);
+  left: calc(50% - 200px);
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+}
+
+#extra-module .window .content {
+  font-size: 22px;
+  text-align: center;
+  padding: 30px 30px 0 30px;
+}
+
+#extra-module .window .content .score {
+  font-size: 30px;
+  color: red;
+}
+
+#extra-module .window .inputs,
+#extra-module .window .buttons {
+  margin: 40px;
+} 
+
+#extra-module .window .buttons button {
+  width: 115px;
+  height: 35px;
+}
+
+.buttons .send {
+  float: right;
+}
+
+/**********************************************************
+
+**********************************************************/
+.quiz-module .quiz-ranking {
+  min-height: 200px;
+}
+
+.ranking-container {
+  margin-left: 20x;
+  padding: 25px 30px;
+  /*background: rgb(238, 238, 238);*/
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid #e0e0e0;
+}
+
+.ranking-container .title {
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 3px;
+  margin: 0 0 20px 0;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgb(0, 0 ,0);
+}
+
+.ranking-container .one-ranker {
+  margin: 20px 0;
+}
+
+.ranking-container .one-ranker .pos {
+  padding: 0;
+}
+.ranking-container .one-ranker .pos span{
+  display: block;
+  float: left;
+  min-width: 22px;
+  min-height: 22px;
+  text-align: center;
+  line-height: 22px;
+  margin: 2px auto;
+  background: #d4d4d4;
+  color: rgb(255, 255, 255);
+}
+
+.ranking-container .one-ranker .info .name {
+  /*display: block;*/
+  font-size: 18px;
+  margin-right: 15px;
+}
+
+.ranking-container .one-ranker .info .score {
+  /*display: block;*/
+  font-size: 13px;
+  color: rgb(133, 133, 133);
+}
+
+.ranking-container .one-ranker:nth-child(1) .pos span {
+  background: #ff6745;
+}
+
+.ranking-container .one-ranker:nth-child(2) .pos span {
+  background: #00bc9b;
+}
+
+.ranking-container .one-ranker:nth-child(3) .pos span {
+  background: #a4b2ba;
 }

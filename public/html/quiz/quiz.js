@@ -208,7 +208,7 @@
             }
             score = roundReloaded(trueCount / questionLength * 100, 2);
 
-            resultSet = '<h2 class="qTitle">' + judgeSkills(score) + '<br/> 您的分数： ' + score + '</h2>' + shareButton + '<div class="jquizzy-clear"></div>' + resultSet + '<div class="jquizzy-clear"></div>';
+            resultSet = '<h2 class="qTitle">' + judgeSkills(score) + '<br/>您的分数： <span class="score">' + score + '</span></h2>' + shareButton + '<div class="jquizzy-clear"></div>' + resultSet + '<div class="jquizzy-clear"></div>';
             superContainer.find('.result-keeper').html(resultSet).show(500);
             superContainer.find('.resultsview-qhover').hide();
             superContainer.find('.result-row').hover(function () {

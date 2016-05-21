@@ -38,12 +38,10 @@ $(document).ready(function (){
       $('.homepage-content').css({display: 'none'});
       $('.article-content').css({display: 'block'});
       // send request
-      var chpt = $(this).attr('id').split('-')[1];
-      sendContentRequest(chpt, function() {
+      var section = $(this).attr('id').split('-')[1];
+      sendContentRequest(section, function() {
         // change the list style
-        $('.sub-nav ul li').removeClass('curr-list');
-        console.log($(('.s-' + chpt)));
-        $(('.s-' + chpt)).addClass('curr-list');
+        changeNavStyle($('#sub-nav ul li'), 'curr-list', section)
       });
     }
     
@@ -52,6 +50,11 @@ $(document).ready(function (){
   // handle sub-nav click
   // bindSubNavClick($('.sub-nav ul li'));
 });
+
+function changeNavStyle(nav, className, section) {
+  nav.removeClass(className);
+  $(nav.selector + '[data-section="' + section + '"]').addClass(className);
+}
 
 function sendContentRequest(section, callback) {
   // var url = '/api/content?section=' + section;
@@ -382,9 +385,7 @@ function bindSubNavClick(elements) {
     sendContentRequest(section, function() {
       // callback means success
       // change the list style
-      $('#sub-nav ul li').removeClass('curr-list');
-      console.log($('#sub-nav ul').children('.s-' + section));
-      $('.s-' + section).addClass('curr-list');
+      changeNavStyle($('#sub-nav ul li'), 'curr-list', section);
     });
   });
 }

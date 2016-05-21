@@ -52,6 +52,7 @@ Collections' detail:
   "username": "username",
   "score": 100,
   "data": "created data"
+}
 ```
 
 
