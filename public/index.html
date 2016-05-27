@@ -25,14 +25,14 @@
       <nav class="main-nav">
         <!--<div class="homepage col-md-2"><a href="javascript:;">首页</a></div>-->
         <ul class="nav nav-pills">
-          <li class="nav-list homepage"><a class="homepage" id="homepage"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> 首页</a></li>
-          <li class="nav-list"><a class="electronic" id="c-0.0">家电与电子产品</a></li>
-          <li class="nav-list"><a class="commodity" id="c-1.0">日用品</a></li>
-          <li class="nav-list"><a class="office-supplies" id="c-2.0">办公用品</a></li>
-          <li class="nav-list"><a class="measuring" id="c-3.0">计量与测试</a></li>
-          <li class="nav-list"><a class="transport" id="c-4.0">交通运输</a></li>
-          <li class="nav-list"><a class="entertainment" id="c-5.0">休闲娱乐与健身用品</a></li>
-          <li class="nav-list"><a class="measuring" id="c-6.0">日用化工与纺织用品</a></li>
+          <li class="nav-list homepage"><a class="homepage curr" id="homepage"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> 首页</a></li>
+          <li class="nav-list"><a class="electronic" id="c-0.0" data-section="0.0">家电与电子产品</a></li>
+          <li class="nav-list"><a class="commodity" id="c-1.0" data-section="1.0">日用品</a></li>
+          <li class="nav-list"><a class="office-supplies" id="c-2.0" data-section="2.0">办公用品</a></li>
+          <li class="nav-list"><a class="measuring" id="c-3.0" data-section="3.0">计量与测试</a></li>
+          <li class="nav-list"><a class="transport" id="c-4.0" data-section="4.0">交通运输</a></li>
+          <li class="nav-list"><a class="entertainment" id="c-5.0" data-section="5.0">休闲娱乐与健身用品</a></li>
+          <li class="nav-list"><a class="measuring" id="c-6.0" data-section="6.0">日用化工与纺织用品</a></li>
         </ul>
       </nav>
     </div>
@@ -42,10 +42,10 @@
     <div class="container notice-module">
       <div class="row">
         <div class="notice col-sm-9 col-xs-11">
-          <p class="little">关于我们：<p>
+          <!--<p class="little">关于我们：<p>-->
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;欢迎访问本科普网站！我们的宗旨，是以网络为平台，通过多媒体演示、网上答题互动等形式，多角度、多层次地介绍与大家日常生活息息相关的用品、用具所蕴含的科学与技术原理，从而提高公民的科学素养。
-          </br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;罗马不是一天建成的，提高科学素养也非一件容易的事情，我们希望本网站能够为我国的科普工作添砖加瓦。如果您有好的想法，请给我们联系。另外，网站的部分素材选自互联网，如有涉及版权，请及时告知。
-          <a href="javascript:;">[了解更多]</a>
+          </br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;罗马不是一天建成的，提高科学素养也非一件容易的事情，我们希望本网站能够为我国的科普工作添砖加瓦。如果您有好的想法，<a href="#footer">请跟我们联系</a>。另外，网站的部分素材选自互联网，如有涉及版权，请及时告知。
+          <!--<a href="javascript:;">[了解更多]</a>-->
         </div>
         <div class="test col-sm-2 col-xs-3">
           <a href="./html/quiz.html" target="_blank">
@@ -57,15 +57,13 @@
     <div class="show-module container">
       <!--<div class="sub-title">随便逛逛</div>-->
       <div class="line"></div>
-      <div class="row">
+      <!--<div class="row">
         <div class="items col-md-4 col-sm-4 col-xs-12">
-          <h3 class="title"><a href="">风扇</a></h3>
-          <div class="tags">
-            <span class="label label-default">电力</span>
-            <span class="label label-primary">自然</span>
-            <span class="label label-success">哈哈</span>
-          </div>
-          <a href=""><img src="./imgs/c-CVT.png" alt="" class="imgs"></a>
+          <h3 class="title">
+            <a href="">风扇</a>
+            <p class="sub-title">Fan</p>
+          </h3>
+          <a href=""><img src="./imgs/CVT.png" alt="" class="imgs"></a>
           <p class="detail">风扇使空气流动吹在人的皮肤上面，使人感觉凉爽。这时空气的温度降低了吗？其实没有，而是流动的空气带走了人体的热量，因此人感觉凉快。</p>
         </div>
         <div class="items col-md-4 col-sm-4 col-xs-12">
@@ -113,7 +111,7 @@
           <a href=""><img src="./imgs/c-mechanical_watch.jpg" alt="" class="imgs"></a>
           <p class="detail">电梯是一种随着高楼大厦而出现的交通或运输工具。轿厢是电梯运载乘客或其他载荷的箱体部件。</p>
         </div>
-      </div>
+      </div>-->
     </div>
   </div>
   
@@ -153,9 +151,18 @@
     <span class="glyphicon glyphicon-circle-arrow-up" title="返回顶部"></span>
   </div>
   
-  <footer class="footer">
+  <footer class="footer" id="footer">
     <div class="container">
-      <p col-md-12>copyright</p>
+      <div class="footer-container">
+        <div class="left col-sm-5">
+          <p>copyright 2016</p>
+          <p>地址：重庆市沙坪坝区沙正街174号 邮编400044</p>
+        </div>
+        <div class="right col-sm-7">
+          <p>陈老师 email:xxxx@xx.xxx phone:13xxxx</p>
+          
+        </div>
+      </div>
     </div>
   </footer>
   <!--</div>-->
@@ -164,6 +171,7 @@
   
   <!-- self -->
   <script src="./js/request.js"></script>
+  <script src="./js/homepage.js"></script>
   <script src="./js/index.js"></script>
 </body>
 </html>

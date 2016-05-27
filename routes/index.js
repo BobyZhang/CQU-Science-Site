@@ -217,6 +217,50 @@ router.get('/api/ranking', function (req, res) {
   })
 })
 
+/* Get homepage */
+router.get('/api/homepageitems', function (req, res) {
+  var resData = {};
+  var count = req.query.count == '0' && 0 || req.query.count || 9  // default is 9
+  var coverUrl = 'imgs/covers/';
+  console.log(count);
+  MongoClient.connect(url, function (err, db) {
+    if (err) {
+      db.close();
+      errHandle(res, "Get failed!");
+    }
+    
+    findHomepage(db, function (err, homepageArry) {
+      if (err) {
+        db.close();
+        errHandle(res, "Get failed!");
+      }
+      
+      // response data
+      resData = {
+        "count": Math.min(count, homepageArry.length),
+        "items": []
+      }
+      // out-of-order the homepageArry
+      homepageArry.sort(function () { return Math.random() > 0.5 ? -1 : 1});
+      
+      for (let i = 0; i < Math.min(count, homepageArry.length); ++i) {
+        var item = {
+          "section": homepageArry[i].section_id,
+          "sectTitle": homepageArry[i].section_title,
+          "sectTitle_en": homepageArry[i].section_title_en,
+          "cover_url": coverUrl + homepageArry[i].cover,
+          "brif": homepageArry[i].brif
+        }
+        resData.items.push(item);
+      }
+      
+      db.close();
+      res.send(JSON.stringify(resData));
+      res.end();
+    })
+  })
+})
+
 function findRankingHandle (res, params, rankers) {
   // if err
   if (!rankers) errHandle(res, "Query error!");
@@ -337,6 +381,25 @@ function findRanking(db, callback) {
     }
     else {
       callback(rankerArry);
+    }
+  })
+}
+
+function findHomepage(db, callback) {
+  var homepageArry = [];
+  var homepages = db.collection('homepage').find();
+  
+  homepages.each(function (err, doc) {
+    if (err) {
+      console.log(err);
+      callback(err, null);
+    }
+    
+    if (doc != null) {
+      homepageArry.push(doc);
+    }
+    else {
+      callback(null, homepageArry);
     }
   })
 }

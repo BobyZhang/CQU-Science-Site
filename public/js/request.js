@@ -50,6 +50,22 @@
       
       callback(resData);
     })
+  },
+  
+  sendHomepageItemsRequest: function (count, callback) {
+    count = (count == '0' && 0 || 6);  // default count is 6
+
+    var url = '/api/homepageitems?count=' + count;
+    
+    $.ajax({
+      type: 'GET',
+      url: url
+    })
+    .done(function (data) {
+      var resData = JSON.parse(data);
+      
+      callback(resData);
+    })
   }
 }
 

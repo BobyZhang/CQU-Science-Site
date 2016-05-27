@@ -26,8 +26,8 @@ $(document).ready(function (){
   // addListener main nav
   $('.nav-list a').click(function () {
     // change the style first
-    $('.nav-list a').css({fontWeight: 'normal'});
-    $(this).css({fontWeight: 'bold'});
+    $('.nav-list a').removeClass('curr');
+    $(this).addClass('curr');
     
     if ($(this).attr('id') == 'homepage') {
       // switch the main display content
@@ -47,8 +47,8 @@ $(document).ready(function (){
     
   });
   
-  // handle sub-nav click
-  // bindSubNavClick($('.sub-nav ul li'));
+  // request the homepage
+  homepageItemsRequest($('.show-module'));
 });
 
 function changeNavStyle(nav, className, section) {
@@ -57,15 +57,6 @@ function changeNavStyle(nav, className, section) {
 }
 
 function sendContentRequest(section, callback) {
-  // var url = '/api/content?section=' + section;
-  
-  // $.ajax({
-  //   type: 'GET',
-  //   url: url
-  // })
-  // .done(function(resData) {
-  //   var data = JSON.parse(resData);
-  //   handleContentRequest(data);
     
   //   // scroll the page
   //   var currPosY = $(document).scrollTop();
@@ -270,6 +261,29 @@ var createSingleSubNav = (function () {
   }
 })();
 
+function homepageItemsRequest(container) {
+  request.sendHomepageItemsRequest(6, function (resData) {
+    if (resData.errcode == 1) {
+      alert(resData.errmsg);
+      return;
+    }
+    
+    var row = new $('<div class="row"></div>');
+    for (let i = 0; i < resData.count; ++i) {
+      var item = new HomepageItem();
+      item.init(resData.items[i]);
+      
+      row.append(item.node());
+      
+      // for one row three item
+      if ((i + 1) % 3 == 0) {
+        container.append(row);
+        row = new $('<div class="row"></div>');
+      }
+    }
+  })
+}
+
 function handleContentRequest(data) {
   
   var article = createSingleArticle();
@@ -283,84 +297,6 @@ function handleContentRequest(data) {
     $('#article').append(article.node());
     $('#sub-nav').append(subNav.node());
   }
-  
-  /*
-  var sA = data.section.split('.');
-  var currChpt = [];
-  currChpt.push(parseInt(sA[0]));
-  currChpt.push(parseInt(sA[1]));
-  
-  
-  // Change the sub-list first
-  if (!isSameChapter(currChpt)) {
-    $('.sub-nav ul').html("");
-    
-    for (var i = 0; i < data.sectList.length; ++i) {
-      // add class name
-      var list = new $('<li class="s-' + currChpt[0] + '.' + i + '"></li>');
-      // add the list
-      list.html(data.sectList[i]);
-      $('.sub-nav ul').append(list);
-    }
-    bindSubNavClick($('.sub-nav ul li')); // Bind sub-nav click
-  }
-  // change sub-nav style
-  $('.sub-nav ul li').removeClass('curr-list');
-  $($('.sub-nav ul li')[currChpt[1]]).addClass('curr-list');
-  
-  // Change the content
-  $('article .title').html(data.sectList[currChpt[1]]);  // change title
-  var content = new $('<p></p>');  // change content
-  var imgsSet = new $('<div class="imgs-set"></div>');
-  for (var i = 0, lastIsImg = false; i < data.content.length; ++i) {
-    // judge whether is img
-    if (data.content[i].indexOf('imgs/') >= 0) {
-      lastIsImg = true;
-      var newImg = new $('<img src="' + data.content[i] + '">');
-      imgsSet.append(newImg);
-    }
-    // not img
-    else {
-      if (lastIsImg) {
-        // push the imgs-set fist
-        content.append(imgsSet);
-        var imgsSet = new $('<div class="imgs-set"></div>');
-        // then push the img explain
-        var imgExplain = new $('<p class="img-explain"></p>');
-        imgExplain.html(data.content[i]);
-        content.append(imgExplain);
-        lastIsImg = false;
-        
-        content.append('<br/>');
-      }
-      else {
-        content.append(data.content[i]);
-        lastIsImg = false;
-        content.append('<br/><br/>');
-      }
-      
-    }
-  }
-  $('article .content').html(content);
-  
-  // add prev and next
-  $('.page-tuning').html("");
-  
-  var prev = $('<a href="javascript:;" id="prev"></a>');
-  var next = $('<a href="javascript:;" id="next"></a>');
-  
-  if (data.prev.sectTitle != "") {
-    $(prev).addClass('s-' + data.prev.section);
-    $(prev).html('&lt; ' + data.prev.sectTitle);
-    bindSubNavClick($(prev));
-  }
-  if (data.next.sectTitle != "") {
-    $(next).addClass('s-' + data.next.section);
-    $(next).html(data.next.sectTitle + ' &gt;');
-    bindSubNavClick($(next));
-  }
-  $('.page-tuning').append(prev).append(next);
-  */
 }
 
 function isSameChapter(chpt) {

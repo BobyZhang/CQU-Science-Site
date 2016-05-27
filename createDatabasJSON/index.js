@@ -3,6 +3,8 @@
 var fs = require('fs');
 var url = './ebook.json';
 
+// trans ebook to catalogs.json and contents.json
+/*
 fs.readFile(url, function (err, data) {
   if (err) return;
   
@@ -41,6 +43,20 @@ fs.readFile(url, function (err, data) {
   // create contents.json
   for (let i = 0; i < contents.length; ++i) {
     fs.appendFile('contents.json', JSON.stringify(contents[i]) + '\n', 'utf-8', function (err) {
+      if (err) return;
+    })
+  }
+})
+*/
+
+// trans homepage.json to homepages.json
+fs.readFile('homepage.json', function (err, data) {
+  if (err) return;
+  
+  var hp = JSON.parse(data);
+  
+  for (let i = 0; i < hp.length; ++i) {
+    fs.appendFile('homepages.json', JSON.stringify(hp[i]) + '\n', 'utf-8', function (err) {
       if (err) return;
     })
   }

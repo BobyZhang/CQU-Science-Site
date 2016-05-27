@@ -12,6 +12,7 @@ body {
 }
 a:hover {
   text-decoration: none;
+  cursor: pointer;
 }
 
 
@@ -24,7 +25,7 @@ header .logo {
   height: auto;
 }
 header .logo img {
-  height: 60px;
+  height: 64px;
   /*float: left;*/
   cursor: pointer;
 }
@@ -67,14 +68,17 @@ header .logo .site-name-en {
   width: 180px;
 }*/
 
-.main-nav .homepage {
+/*.main-nav .homepage {
   font-weight: bold;
-}
+}*/
 
 .main-nav .nav-list a {
   font-size: 18px;
   color: rgba(0, 0, 0, 1);
   cursor: pointer;
+}
+.main-nav .nav-list a.curr {
+  font-weight: bold;
 }
 
 .nav .homepage {
@@ -114,6 +118,13 @@ header .logo .site-name-en {
 .items .title a {
   color: rgba(0, 0, 0, 1);
 }
+.items .title .sub-title {
+  margin: 4px 0;
+  padding: 0;
+  font-size: 20px;
+  color: #999;
+  border: 0;
+}
 
 .items .tags {
   margin: 18px auto;
@@ -134,8 +145,12 @@ header .logo .site-name-en {
 .footer {
   margin-top: 30px;
 }
+.footer .left,
+.footer .right {
+  padding: 0;
+}
 
-.footer p {
+.footer .footer-container {
   padding: 15px 15px;
   border-top: 1px solid rgb(230, 230, 230);
 }
@@ -225,7 +240,8 @@ header .logo .site-name-en {
   border: 2px dashed #bbb;
   padding: 20px 25px;
   margin: 0 15px;
-  font-size: 15px;
+  font-size: 16px;
+  line-height: 30px;
   border-radius: 3px;
 }
 

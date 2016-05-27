@@ -40,7 +40,7 @@ Collections' detail:
 {
   "section_id": "0.0",
   "section_title": "first section of chapter 0",
-  "tags": ["electric", "mechanical"],
+  "section_title_en": "the english of title",
   "cover": "uri:img/example.png",
   "brif": "just some brif information"
 }
@@ -180,8 +180,8 @@ return:
     {
       section: string
       sectTitle: string
-      tags: []
-      cover_uri: string
+      sectTitle_en: string
+      cover_url: string
       brif: string
     }
   ]
