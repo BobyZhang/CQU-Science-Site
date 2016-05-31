@@ -1,83 +1,80 @@
- var request = {
-  // getContent 
-  getContent: function (section, callback) {
+'use strict';
+
+var request = {
+  // getContent
+  getContent: function getContent(section, callback) {
     $.ajax({
       type: 'GET',
       url: '/api/content?section=' + section
-    })
-    .done(function (data){
+    }).done(function (data) {
       var resData = JSON.parse(data);
-      
+
       callback(resData);
-    })
+    });
   },
-  
-  modifyContent: function (postData, callback) {
+
+  modifyContent: function modifyContent(postData, callback) {
     $.ajax({
       url: '/api/modify',
       type: 'POST',
-      data: postData      
-    })
-    .done(function (data) {
+      data: postData
+    }).done(function (data) {
       var resData = JSON.parse(data);
-      
+
       callback(resData);
-    })
+    });
   },
-  
-  sendRankingRequest: function(count, name, score, callback) {
+
+  sendRankingRequest: function sendRankingRequest(count, name, score, callback) {
     var paramStr = "";
-    
+
     if (name && score) {
       paramStr = serialParam({
-      "count": count,
+        "count": count,
         "username": name,
         "score": score
       });
-    }
-    else {
+    } else {
       paramStr = serialParam({ "count": count });
     }
-     
-    var url = '/api/ranking' + paramStr;
-    
-    $.ajax({
-      type: 'GET',
-      url: url,
-    })
-    .done(function (data) {
-      var resData = JSON.parse(data);
-      
-      callback(resData);
-    })
-  },
-  
-  sendHomepageItemsRequest: function (count, callback) {
-    count = (count == '0' && 0 || 6);  // default count is 6
 
-    var url = '/api/homepageitems?count=' + count;
-    
+    var url = '/api/ranking' + paramStr;
+
     $.ajax({
       type: 'GET',
       url: url
-    })
-    .done(function (data) {
+    }).done(function (data) {
       var resData = JSON.parse(data);
-      
+
       callback(resData);
-    })
+    });
+  },
+
+  sendHomepageItemsRequest: function sendHomepageItemsRequest(count, callback) {
+    count = count == '0' && 0 || 6; // default count is 6
+
+    var url = '/api/homepageitems?count=' + count;
+
+    $.ajax({
+      type: 'GET',
+      url: url
+    }).done(function (data) {
+      var resData = JSON.parse(data);
+
+      callback(resData);
+    });
   }
-}
+};
 
 function serialParam(obj) {
   var str = '?';
-  
+
   for (var attr in obj) {
     str = str + attr + '=' + obj[attr] + '&';
   }
-  
+
   // get out the last char '&'
   str = str.substr(0, str.length - 1);
-  
+
   return str;
 }

@@ -1,7 +1,7 @@
 body
 {
     font-family: Helvetica, Tahoma, Arial, STXihei, "����ϸ��", "Microsoft YaHei", "΢���ź�", SimSun, "����", Heiti, "����", sans-serif;
-    font-weight: bold;
+    /*font-weight: bold;*/
 }
 
 .btn-test:hover {

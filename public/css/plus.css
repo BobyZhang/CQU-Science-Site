@@ -2,6 +2,7 @@
   display: block;
   margin: 30px auto 0 auto;
   font-size: 16px;
+  font-weight: bold;
 }
 
 .sub-page-nav .curr-sub-page {
@@ -89,6 +90,7 @@
 
 .ranking-container .one-ranker {
   margin: 20px 0;
+  font-weight: bold;
 }
 
 .ranking-container .one-ranker .pos {

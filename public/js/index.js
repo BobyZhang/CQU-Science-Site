@@ -34,12 +34,14 @@ $(document).ready(function (){
       $('.homepage-content').css({display: 'block'});
       $('.article-content').css({display: 'none'});
     } else {
-      // switch the main display content
-      $('.homepage-content').css({display: 'none'});
-      $('.article-content').css({display: 'block'});
+      
       // send request
       var section = $(this).attr('id').split('-')[1];
       sendContentRequest(section, function() {
+        // switch the main display content
+        $('.homepage-content').css({display: 'none'});
+        $('.article-content').css({display: 'block'});
+        
         // change the list style
         changeNavStyle($('#sub-nav ul li'), 'curr-list', section)
       });
@@ -110,7 +112,7 @@ class Article {
     // set strategies
     var strateges = {
       "isText": function(container, content) {
-        container.append(content);
+        container.append('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + content);
         container.append('<br><br>');
       },
       "isDefine": function(container, content) {
@@ -123,6 +125,11 @@ class Article {
       "isVideo": function(container, content) {
         var newVideo = new $('<video class="article-video" controls=""controls>您的浏览器不支持 video 标签。</video>');
         newVideo.attr('src', content);
+        
+        // add sub title
+        var track = new $('<track label="简体中文" kind="caption">');
+        track.attr('src', content.split('.')[0] + '.vtt');
+        newVideo.append(track);
         
         container.append(newVideo);
         container.append('<br>');
