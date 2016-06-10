@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>管理员修改</title>
   <link rel="stylesheet" href="../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/uploadfile.css">
   <style>
     body {
       font-size: 16px;
@@ -28,20 +29,34 @@
     .submit-modified {
       margin: 20px 0;
     }
+    .uploade-file {
+      padding: 0 0 10px 0;
+      border-bottom: 1px solid #ddd;
+    }
   </style>
+  
+  <script src="../js/jquery-2.1.4.min.js"></script>
+  <script src="../js/bootstrap.min.js"></script>
+  <script src="../js/jquery.uploadfile.min.js"></script>
 </head>
 <body>
   <div class="container">
     <div class="content-wrapper">
       <div class="rules">
         <p><b>添加规则：</b></P>
-        <p>1. 段与段之间用 "-----" 五个连线符区分开(不包含双引号)，其中一张图片，一个视屏都算单独的一段。
-        </P><p>2. 添加图片的规则： "imgs/" + "图片的名字"，如 "imgs/电梯.png" (不包含引号，以下所有格式相关都不包含引号)。
-        </P><p>&nbsp;&nbsp;&nbsp;&nbsp;(注意： 当相邻段落都为图片时，这些图片会显示在同一行。)
-        </P><p>3. 添加视频的规则： "videos/" + "视频的名字"，如 "videos/手表.mp4"。
-        </P><p>4. 添加图片或视频的解释短语规则： "define/" + "解释短语"，如 "define/燃气灶的工作原理"。
+        <p>1. 段与段之间用 "-----" 五个连线符区分开(不包含双引号)，其中一张图片，一个视频都算单独的一段。
+        </p><p>2. 添加图片的规则： "imgs/" + "图片的名字"，如 "imgs/电梯.png" (不包含引号，以下所有格式相关都不包含引号)。
+        </p><p>&nbsp;&nbsp;&nbsp;&nbsp;(注意： 当相邻段落都为图片时，这些图片会显示在同一行。)
+        </p><p>3. 图片格式限制： *.png, *.jpg, *.gif, *.jpeg
+        </p><p>4. 添加视频的规则： "videos/" + "视频的名字"，如 "videos/手表.mp4"。
+        </p><p>5. 视频格式限制： *.mp4, *.ogg
+        </p><p>6. 添加图片或视频的解释短语规则： "define/" + "解释短语"，如 "define/燃气灶的工作原理"。
         
         </p>
+      </div>
+      <div class="uploade-file">
+        <p><b>上传文件：</b></p>
+        <div id="fileuploader">Upload</div>
       </div>
       <div class="menu">
         <b>请选择章：</b>
@@ -65,10 +80,11 @@
       <input type="button" class="btn btn-info submit-modified" value="提交修改">
     </div>
   </div>
-  <script src="../js/jquery-2.1.4.min.js"></script>
-  <script src="../js/bootstrap.min.js"></script>
+  
   
   <script src="../js-compile/request.js"></script>
   <script src="../js-compile/admin.js"></script>
+  <!--<script src="../js/admin.js"></script>-->
+  
 </body>
 </html>

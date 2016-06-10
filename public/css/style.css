@@ -145,14 +145,18 @@ header .logo .site-name-en {
 .footer {
   margin-top: 30px;
 }
-.footer .left,
+/*.footer .left,
 .footer .right {
   padding: 0;
-}
+}*/
 
 .footer .footer-container {
   padding: 15px 15px;
   border-top: 1px solid rgb(230, 230, 230);
+}
+
+.footer .right div {
+  padding: 0;
 }
 
 /**************************************************************
@@ -201,7 +205,9 @@ header .logo .site-name-en {
   width: 100%;
   margin: 20px 0;
 }
-
+#article img {
+  max-width: 100%;
+}
 #sub-nav ul {
   list-style: none;
   float: left;

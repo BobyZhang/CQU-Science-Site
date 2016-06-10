@@ -59,7 +59,9 @@
   width: 115px;
   height: 35px;
 }
-
+#extra-module .error-message {
+  color: red;
+}
 .buttons .send {
   float: right;
 }
@@ -91,6 +93,7 @@
 .ranking-container .one-ranker {
   margin: 20px 0;
   font-weight: bold;
+  overflow-x: hidden;
 }
 
 .ranking-container .one-ranker .pos {
@@ -110,6 +113,8 @@
 
 .ranking-container .one-ranker .info .name {
   /*display: block;*/
+  display: inline-block;
+  max-width: 90%;
   font-size: 18px;
   margin-right: 15px;
 }

@@ -136,7 +136,7 @@ var Article = function () {
           newVideo.attr('src', content);
 
           // add sub title
-          var track = new $('<track label="简体中文" kind="caption">');
+          var track = new $('<track label="简体中文" kind="subtitles" default>');
           track.attr('src', content.split('.')[0] + '.vtt');
           newVideo.append(track);
 

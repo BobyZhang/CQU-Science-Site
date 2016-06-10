@@ -3,6 +3,7 @@
 var express = require('express');
 var router = express.Router();
 var fs = require('fs');
+var formidable = require('formidable');
 
 // For MongoDB
 var MongoClient = require('mongodb').MongoClient;
@@ -260,6 +261,34 @@ router.get('/api/homepageitems', function (req, res) {
     })
   })
 })
+
+/* Post the file */
+router.post('/api/uploadfile', function (req, res) {
+  var form = new formidable.IncomingForm();
+  form.uploadDir = "./public";
+  
+  form.parse(req, function (err, fields, files) {
+    var dir = '../www/public/';
+    if (isVideoOrSubtitle(files.myfile.name)) dir += 'videos/';
+    else dir += 'imgs/'
+    
+    console.log(dir + files.myfile.name);
+    fs.rename(files.myfile.path, dir + files.myfile.name);
+    res.end();
+  })
+})
+
+function isVideoOrSubtitle(filename) {
+  var suffix = ['.ogg', '.mp4', '.vtt'];
+  
+  for (var i = 0; i < suffix.length; ++i) {
+    if (filename.indexOf(suffix[i]) > 0) {
+      return true;
+    }
+  }
+  
+  return false;
+}
 
 function findRankingHandle (res, params, rankers) {
   // if err

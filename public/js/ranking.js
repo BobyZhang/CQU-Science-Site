@@ -13,7 +13,7 @@ class AlertWindow {
     // input name
     this.inputs = new $('<div class="inputs">留下您的姓名： </div>');
     this.clientName = new $('<input type="text" class="name">');
-    this.errMessage = new $('<p class="error-message></p>');
+    this.errMessage = new $('<p class="error-message"></p>');
     this.inputs.append(this.clientName).append(this.errMessage);
     
     // button group
@@ -30,6 +30,21 @@ class AlertWindow {
       var count = 5;
       var score = that.content.find('.score').text();
       var name = that.clientName.val();
+      
+      // verification
+      if (name.length > 10) {
+        that.errMessage.html('* 您输入的姓名过长');
+        that.errMessage.display = 'block';
+        return false;
+      }
+      var pattern = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？]"); 
+      if(name != "" && name != null){  
+        if(pattern.test(name)){  
+          that.errMessage.html('* 含有非法字符！');
+          that.errMessage.display = 'block';
+          return false;  
+        }  
+      } 
       
       // hidden 
       that.wrapper.css('display', 'none');
