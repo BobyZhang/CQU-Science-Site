@@ -271,7 +271,7 @@ router.post('/api/uploadfile', function (req, res) {
   form.parse(req, function (err, fields, files) {
     if (err) console.log(err);
     console.log(files.myfile.name);
-    var dir = '../www/public/';
+    var dir = '/srv/www/public/';
     // var dir = 'public/';
     if (isVideoOrSubtitle(files.myfile.name)) dir += 'videos/';
     else dir += 'imgs/'
