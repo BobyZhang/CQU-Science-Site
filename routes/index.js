@@ -266,13 +266,21 @@ router.get('/api/homepageitems', function (req, res) {
 router.post('/api/uploadfile', function (req, res) {
   var form = new formidable.IncomingForm();
   form.uploadDir = "./public";
+  form.maxFieldsSize = 2 * 1024 * 1024 * 1024;
   
+  form.on('progress', function (bytesReceived, bytesExpected) {
+   //在这里判断接受到数据是否超过最大，超过截断接受流
+   console.log('aaaaaaaaa');
+    console.log(bytesExpected, bytesExpected);
+  });
   form.parse(req, function (err, fields, files) {
-    var dir = '../www/public/';
+    if (err) console.log(err);
+    console.log(files.myfile.name);
+    // var dir = '../www/public/';
+    var dir = 'public/';
     if (isVideoOrSubtitle(files.myfile.name)) dir += 'videos/';
     else dir += 'imgs/'
-    
-    console.log(dir + files.myfile.name);
+
     fs.rename(files.myfile.path, dir + files.myfile.name);
     res.end();
   })
